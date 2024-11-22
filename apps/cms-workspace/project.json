@@ -1,0 +1,30 @@
+{
+  "name": "cms-workspace",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/cms-workspace",
+  "projectType": "application",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project cms-workspace --web",
+  "targets": {
+    "serve": {
+      "executor": "@nx/next:server",
+      "options": {
+        "buildTarget": "cms-workspace:build",
+        "dev": true
+      }
+    },
+    "build": {
+      "executor": "@nx/next:build",
+      "outputs": ["dist/apps/cms-workspace"],
+      "options": {
+        "outputPath": "dist/apps/cms-workspace"
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["apps/cms-workspace/**/*.ts", "apps/cms-workspace/**/*.tsx"]
+      }
+    }
+  }
+}
