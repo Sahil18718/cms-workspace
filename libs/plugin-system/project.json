@@ -1,0 +1,19 @@
+{
+  "name": "plugin-system",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/plugin-system/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/plugin-system",
+        "main": "libs/plugin-system/src/index.ts",
+        "tsConfig": "libs/plugin-system/tsconfig.lib.json",
+        "assets": ["libs/plugin-system/*.md"]
+      }
+    }
+  }
+}

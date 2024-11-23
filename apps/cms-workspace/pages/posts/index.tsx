@@ -46,7 +46,7 @@ const PostList = () => {
         {posts.map((post) => (
           <li key={post.id}>
             <h2>{post.title}</h2>
-            <p>{post.content.slice(0, 100)}...</p>
+            {/* <p>{post.content.slice(0, 100)}...</p> */}
             <button onClick={() => router.push(`/posts/edit/${post.id}`)}>Edit</button>
             <button onClick={() => handleDelete(post.id)}>Delete</button>
           </li>

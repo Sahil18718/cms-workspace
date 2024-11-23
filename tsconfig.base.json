@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@cms-workspace/api": ["libs/api/src/index.ts"]
+      "@cms-workspace/api": ["libs/api/src/index.ts"],
+      "@cms-workspace/plugin-system": ["libs/plugin-system/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -1,59 +1,34 @@
-import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
-const PageList = () => {
-    const [pages, setPages] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const router = useRouter();
+const HomePage = () => {
+  const [posts, setPosts] = useState([]);
 
-    useEffect(() => {
-        const fetchPages = async () => {
-            const response = await fetch('/api/pages');
-            if (response.ok) {
-                const data = await response.json();
-                setPages(data);
-                setLoading(false);
-            } else {
-                alert('Failed to fetch pages.');
-            }
-        };
-
-        fetchPages();
-    }, []);
-
-    const handleDelete = async (id: number) => {
-        if (confirm('Are you sure you want to delete this page?')) {
-            const response = await fetch(`/api/pages/${id}`, {
-                method: 'DELETE',
-            });
-
-            if (response.ok) {
-                alert('Page deleted successfully!');
-                setPages(pages.filter((page) => page.id !== id));
-            } else {
-                alert('Failed to delete page.');
-            }
-        }
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const response = await fetch('/api/posts');
+      const data = await response.json();
+      setPosts(data);
     };
 
-    if (loading) return <div>Loading...</div>;
+    fetchPosts();
+  }, []);
 
-    return (
-        <div>
-            <h1>Page List</h1>
-            <button onClick={() => router.push('/pages/create')}>Create New Page</button>
-            <ul>
-                {pages.map((page) => (
-                    <li key={page.id}>
-                        <h2>{page.title}</h2>
-                        <p>{page.content.slice(0, 100)}...</p>
-                        <button onClick={() => router.push(`/pages/edit/${page.id}`)}>Edit</button>
-                        <button onClick={() => handleDelete(page.id)}>Delete</button>
-                    </li>
-                ))}
-            </ul>
-        </div>
-    );
+  return (
+    <div>
+      <h1 className="text-2xl font-bold mb-4">Welcome to the CMS</h1>
+      <h2 className="text-xl font-semibold mb-2">Posts</h2>
+      <ul className="list-disc pl-4">
+        {posts.map((post: any) => (
+          <li key={post.id}>
+            <Link href={`/posts/edit/${post.id}`}>
+              <a className="text-blue-500 hover:underline">{post.title}</a>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 };
 
-export default PageList;
+export default HomePage;
