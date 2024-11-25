@@ -12,7 +12,7 @@ export const getPostById = async (id: number) => {
   return prisma.post.findUnique({ where: { id } });
 };
 
-export const updatePost = async (id: number, data: { title: string; slug: string; content: string }) => {
+export const updatePost = async (id: number, data: { title: string; slug: string; contentBlocks: string }) => {
   return prisma.post.update({ where: { id }, data });
 };
 

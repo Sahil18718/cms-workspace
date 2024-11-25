@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import RichTextEditor from './RichTextEditor';
+import RichTextEditor from './RichImageEditor';
 
 export default {
   title: 'Components/RichTextEditor',

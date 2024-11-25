@@ -1,22 +1,32 @@
 import React from 'react';
 import { pluginSystem } from '@cms-workspace/plugin-system';
 
-const ContentRenderer = ({ blocks }: { blocks?: any[] }) => {
+interface ContentBlock {
+  type: string;
+  props: any;
+}
+
+const ContentRenderer = ({ blocks }: { blocks: ContentBlock[] }) => {
+  // Fetch content blocks registered in the plugin system
   const contentBlocks = pluginSystem.getContentBlocks();
 
-  // Default to an empty array if blocks is undefined
-  const safeBlocks = blocks || [];
-
   return (
-    <>
-      {safeBlocks.map((block, index) => {
+    <div>
+      {blocks.map((block, index) => {
         const BlockComponent = contentBlocks.find((cb) => cb.type === block.type)?.render;
 
-        if (!BlockComponent) return <div key={index}>Unsupported block: {block.type}</div>;
+        if (!BlockComponent) {
+          return (
+            <div key={index} className="text-red-500">
+              Unsupported block type: {block.type}
+            </div>
+          );
+        }
 
+        // Render the block dynamically
         return <BlockComponent key={index} {...block.props} />;
       })}
-    </>
+    </div>
   );
 };
 

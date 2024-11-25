@@ -1,33 +1,40 @@
 import React, { useState } from 'react';
-import RichTextEditor from '../../components/RichTextEditor';
+import RichTextEditor from '../../components/RichImageEditor';
 import '../global.css';
 import Header from 'apps/cms-workspace/components/Header';
 import { useRouter } from 'next/router';
+
+interface ContentBlock {
+  type: string;
+  props: any;
+}
+
 const CreatePost = () => {
   const [title, setTitle] = useState('');
   const [slug, setSlug] = useState('');
-  const [content, setContent] = useState('');
+  const [contentBlocks, setContentBlocks] = useState<ContentBlock[]>([]);
   const router = useRouter();
 
   const handleSave = async () => {
-    if (!title || !slug || !content) {
+    if (!title || !slug || contentBlocks.length === 0) {
       alert('Please fill in all fields before saving.');
       return;
     }
+
 
     const response = await fetch('/api/posts', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ title, slug, content }),
+      body: JSON.stringify({ title, slug, contentBlocks }),
     });
 
     if (response.ok) {
       alert('Post created successfully!');
       setTitle('');
       setSlug('');
-      setContent('');
+      setContentBlocks([]);
       router.push('/');
     } else {
       alert('Failed to create post.');
@@ -38,7 +45,6 @@ const CreatePost = () => {
     <>
       <Header />
       <div className="container mx-auto p-6">
-
         <h1 className="text-2xl font-bold text-center mb-6">Create New Post</h1>
         <form
           className="bg-white shadow-md rounded-lg p-6 max-w-2xl mx-auto"
@@ -81,7 +87,7 @@ const CreatePost = () => {
             <label htmlFor="content" className="block text-sm font-medium text-gray-700 mb-2">
               Content
             </label>
-            <RichTextEditor content={content} onContentChange={setContent} />
+            <RichTextEditor content={contentBlocks} onContentChange={setContentBlocks} />
           </div>
 
           <div className="flex justify-end">
@@ -95,7 +101,6 @@ const CreatePost = () => {
         </form>
       </div>
     </>
-
   );
 };
 

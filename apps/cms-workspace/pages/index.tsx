@@ -3,11 +3,13 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import './global.css';
 import Header from '../components/Header';
+import ContentRenderer from '../components/ContentRenderer';
 
 interface Post {
   id: number;
   title: string;
   slug: string;
+  contentBlocks: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -83,15 +85,12 @@ const HomePage = () => {
 
   return (
     <>
-      {/* Header */}
       <Header />
 
-      {/* Main Content */}
       <main className="container mx-auto p-4">
         <section className="mb-8">
           <h1 className="text-2xl font-bold mb-4">Welcome to the CMS</h1>
 
-          {/* Posts Table */}
           <div className="mb-8">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-xl font-semibold">Posts</h2>
@@ -109,7 +108,7 @@ const HomePage = () => {
                     <th className="px-4 py-2 text-left">ID</th>
                     <th className="px-4 py-2 text-left">Title</th>
                     <th className="px-4 py-2 text-left">Slug</th>
-                    {/* <th className="px-4 py-2 text-left">Content</th> */}
+                    <th className="px-4 py-2 text-left">Content</th>
                     <th className="px-4 py-2 text-left">Created At</th>
                     <th className="px-4 py-2 text-left">Updated At</th>
                     <th className="px-4 py-2">Actions</th>
@@ -121,7 +120,9 @@ const HomePage = () => {
                       <td className="px-4 py-2">{post.id}</td>
                       <td className="px-4 py-2">{post.title}</td>
                       <td className="px-4 py-2">{post.slug}</td>
-                      {/* <td className="px-4 py-2">{post.contentBlocks}</td> */}
+                      <td className="px-4 py-2">
+                        <ContentRenderer blocks={post.contentBlocks || []} />
+                      </td>
                       <td className="px-4 py-2">{new Date(post.createdAt).toLocaleString()}</td>
                       <td className="px-4 py-2">{new Date(post.updatedAt).toLocaleString()}</td>
                       <td className="px-4 py-2 flex space-x-2 justify-center">

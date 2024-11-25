@@ -1,8 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import '../../global.css';
-import RichTextEditor from '../../../components/RichTextEditor';
+import RichTextEditor from '../../../components/RichImageEditor';
 import Header from 'apps/cms-workspace/components/Header';
+
+interface ContentBlock {
+  type: string;
+  props: { src: string };
+}
 
 const PostDetail = () => {
   const router = useRouter();
@@ -10,9 +15,9 @@ const PostDetail = () => {
 
   const [title, setTitle] = useState('');
   const [slug, setSlug] = useState('');
-  const [contentBlocks, setContentBlocks] = useState('');
+  const [contentBlocks, setContentBlocks] = useState<ContentBlock[]>([]);
   const [loading, setLoading] = useState(true);
-  const [isSlugEdited, setIsSlugEdited] = useState(false); // Tracks manual edits to the slug
+  const [isSlugEdited, setIsSlugEdited] = useState(false);
 
   useEffect(() => {
     if (!id) return;
@@ -22,9 +27,18 @@ const PostDetail = () => {
         const response = await fetch(`/api/posts/${id}`);
         if (response.ok) {
           const data = await response.json();
+
+
+          const transformedBlocks = data.contentBlocks.map((block: any) => ({
+            type: 'image-block',
+            props: {
+              src: block.props.content,
+            },
+          }));
+
           setTitle(data.title);
           setSlug(data.slug);
-          setContentBlocks(data.contentBlocks);
+          setContentBlocks(transformedBlocks);
         } else {
           alert('Failed to fetch the post.');
         }
@@ -40,7 +54,6 @@ const PostDetail = () => {
 
   const handleTitleChange = (newTitle: string) => {
     setTitle(newTitle);
-    // Only update the slug if it hasn't been manually edited
     if (!isSlugEdited) {
       setSlug(newTitle.toLowerCase().replace(/ /g, '-'));
     }
@@ -48,7 +61,7 @@ const PostDetail = () => {
 
   const handleSlugChange = (newSlug: string) => {
     setSlug(newSlug);
-    setIsSlugEdited(true); // Mark slug as manually edited
+    setIsSlugEdited(true);
   };
 
   const handleSave = async () => {

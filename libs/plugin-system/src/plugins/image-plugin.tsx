@@ -1,3 +1,4 @@
+import React from 'react';
 import { Plugin } from '../lib/types';
 
 export const ImagePlugin: Plugin = {
@@ -6,18 +7,16 @@ export const ImagePlugin: Plugin = {
   register: (context) => {
     context.addContentBlock({
       type: 'image-block',
-      render: (props: { src: string; alt: string }) => {
-        return (
-          <img
-            src={props.src}
-            alt={props.alt}
-            style={{
-              maxWidth: '100%',
-              height: 'auto',
-            }}
-          />
-        );
-      },
+      render: (props: { src: string; alt: string }) => (
+        <img
+          src={props.src}
+          alt={props.alt}
+          style={{
+            maxWidth: '100%',
+            height: 'auto',
+          }}
+        />
+      ),
     });
   },
 };

@@ -1,4 +1,11 @@
 {
   "name": "cms-workspace",
-  "packageManager": "yarn@3.6.4"
+  "packageManager": "yarn@3.6.4",
+  "dependencies": {
+    "formidable": "^3.5.2"
+  },
+  "devDependencies": {
+    "@types/formidable": "^3.4.5",
+    "@types/jest": "^29.5.14"
+  }
 }

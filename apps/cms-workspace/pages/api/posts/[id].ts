@@ -8,8 +8,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const post = await getPostById(Number(id));
     return res.status(200).json(post);
   } else if (req.method === 'PUT') {
-    const { title, slug, content } = req.body;
-    const updatedPost = await updatePost(Number(id), { title, slug, content });
+    const { title, slug, contentBlocks } = req.body
+    const updatedPost = await updatePost(Number(id), { title, slug, contentBlocks });
     return res.status(200).json(updatedPost);
   } else if (req.method === 'DELETE') {
     await deletePost(Number(id));

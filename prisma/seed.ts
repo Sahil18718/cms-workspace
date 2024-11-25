@@ -13,8 +13,6 @@ async function main() {
       ],
     },
   });
-
-  console.log('Sample data seeded!');
 }
 
 main()

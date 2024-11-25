@@ -4,6 +4,7 @@ import RichTextEditor from '../../components/RichTextEditor';
 import '../global.css';
 import Header from 'apps/cms-workspace/components/Header';
 
+
 const CreatePage = () => {
   const [title, setTitle] = useState('');
   const [slug, setSlug] = useState('');
@@ -84,7 +85,6 @@ const CreatePage = () => {
             <RichTextEditor content={content} onContentChange={setContent} />
           </div>
 
-          {/* Save Button */}
           <div className="flex justify-end">
             <button
               onClick={handleSave}

@@ -47,10 +47,9 @@ const EditPage = () => {
         },
         body: JSON.stringify({ title, slug, content }),
       });
-
       if (response.ok) {
         alert('Page updated successfully!');
-        router.push('/pages');
+        router.push('/');
       } else {
         alert('Failed to update page.');
       }
