@@ -24,7 +24,7 @@
             "command": "npx prisma studio"
           },
           {
-            "command": "cd app-docs && yarn start"
+            "command": "cd app-docs && yarn install && yarn start"
           },
           {
             "command": "nx serve cms-workspace"

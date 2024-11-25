@@ -33,12 +33,15 @@ git clone <repository-url>
 ```
 
 ### 2. Install Dependencies in root
-`yarn install`
-
+```bash
+yarn install
+```
 
 ### 3. Configure the Environment Variables
 Create a .env file in the root of your project with the following contents:
-`DATABASE_URL=postgresql://<username>:<password>@<host>:<port>/<database>`
+```bash
+DATABASE_URL=postgresql://<username>:<password>@<host>:<port>/<database>
+```
 
 
 
@@ -50,4 +53,12 @@ npx prisma generate
 ```
 
 ###  5. Start the Development Server
-`yarn nx serve-all cms-workspace`
+```bash
+yarn nx serve-all cms-workspace
+```
+```bash
+http://localhost:4200/
+http://localhost:4200/posts/create
+http://localhost:4200/pages/create
+http://localhost:5555/
+```
