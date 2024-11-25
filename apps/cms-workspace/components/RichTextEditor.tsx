@@ -11,13 +11,12 @@ const RichTextEditor = ({ content, onContentChange }: { content: string; onConte
     },
   });
 
-  // Prevent rendering EditorContent if the editor is not ready
   if (!editor) {
     return <div>Loading Editor...</div>;
   }
 
   return (
-    <div>
+    <div className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
       <EditorContent editor={editor} />
     </div>
   );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import RichTextEditor from './RichTextEditor';
 
 export default {
@@ -6,4 +6,13 @@ export default {
   component: RichTextEditor,
 };
 
-export const Default = () => <RichTextEditor />;
+export const Default = () => {
+  const [content, setContent] = useState('');
+
+  return (
+    <RichTextEditor
+      content={content}
+      onContentChange={(newContent) => setContent(newContent)}
+    />
+  );
+};

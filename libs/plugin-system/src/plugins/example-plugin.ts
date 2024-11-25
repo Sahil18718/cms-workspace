@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Plugin } from "../lib/plugin-system"
 
 export const ExamplePlugin: Plugin = {

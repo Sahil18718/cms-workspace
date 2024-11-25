@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import RichTextEditor from '../../components/RichTextEditor';
+import '../global.css';
+import Header from 'apps/cms-workspace/components/Header';
 
 const CreatePage = () => {
   const [title, setTitle] = useState('');
@@ -9,6 +11,11 @@ const CreatePage = () => {
   const router = useRouter();
 
   const handleSave = async () => {
+    if (!title || !slug || !content) {
+      alert('Please fill in all fields before saving.');
+      return;
+    }
+
     const response = await fetch('/api/pages', {
       method: 'POST',
       headers: {
@@ -19,38 +26,77 @@ const CreatePage = () => {
 
     if (response.ok) {
       alert('Page created successfully!');
-      router.push('/pages');
+      setTitle('');
+      setSlug('');
+      setContent('');
+      router.push('/');
     } else {
       alert('Failed to create page.');
     }
   };
 
   return (
-    <div>
-      <h1>Create New Page</h1>
-      <form onSubmit={(e) => e.preventDefault()}>
-        <div>
-          <label>Title:</label>
-          <input
-            type="text"
-            value={title}
-            onChange={(e) => {
-              setTitle(e.target.value);
-              setSlug(e.target.value.toLowerCase().replace(/ /g, '-'));
-            }}
-          />
-        </div>
-        <div>
-          <label>Slug:</label>
-          <input type="text" value={slug} readOnly />
-        </div>
-        <div>
-          <label>Content:</label>
-          <RichTextEditor content={content} onContentChange={setContent} />
-        </div>
-        <button onClick={handleSave}>Save</button>
-      </form>
-    </div>
+    <>
+      <Header />
+      <div className="container mx-auto p-6">
+        <h1 className="text-2xl font-bold text-center mb-6">Create New Page</h1>
+        <form
+          className="bg-white shadow-md rounded-lg p-6 max-w-2xl mx-auto"
+          onSubmit={(e) => e.preventDefault()}
+        >
+          <div className="mb-4">
+            <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-2">
+              Title
+            </label>
+            <input
+              id="title"
+              type="text"
+              value={title}
+              onChange={(e) => {
+                setTitle(e.target.value);
+                if (!slug) {
+                  setSlug(e.target.value.toLowerCase().replace(/ /g, '-'));
+                }
+              }}
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Enter the page title"
+            />
+          </div>
+
+          <div className="mb-4">
+            <label htmlFor="slug" className="block text-sm font-medium text-gray-700 mb-2">
+              Slug
+            </label>
+            <input
+              id="slug"
+              type="text"
+              value={slug}
+              onChange={(e) => setSlug(e.target.value)}
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Enter a custom slug or leave it auto-generated"
+            />
+          </div>
+
+          <div className="mb-6">
+            <label htmlFor="content" className="block text-sm font-medium text-gray-700 mb-2">
+              Content
+            </label>
+            <RichTextEditor content={content} onContentChange={setContent} />
+          </div>
+
+          {/* Save Button */}
+          <div className="flex justify-end">
+            <button
+              onClick={handleSave}
+              className="bg-blue-600 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              Save Page
+            </button>
+          </div>
+        </form>
+      </div>
+    </>
+
   );
 };
 

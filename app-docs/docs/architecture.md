@@ -7,4 +7,4 @@
  # Project Architecture
 
 ## Component Documentation
-The CMS components, such as `RichTextEditor` and `ContentRenderer`, are documented in [Storybook](http://localhost:4400).
+The CMS components, such as `RichTextEditor` and `ContentRenderer`, are documented in [Storybook](http://localhost:59581/).

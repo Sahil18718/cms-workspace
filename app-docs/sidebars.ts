@@ -14,7 +14,7 @@ const sidebars: SidebarsConfig = {
     {
       type: 'link',
       label: 'Storybook', // Label shown in the sidebar
-      href: 'http://localhost:4400', // Replace with your deployed Storybook URL later
+      href: 'http://localhost:59581/', // Replace with your deployed Storybook URL later
     },
   ],
 };

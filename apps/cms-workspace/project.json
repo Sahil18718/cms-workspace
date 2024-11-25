@@ -13,9 +13,29 @@
         "dev": true
       }
     },
+    "serve-all": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "npx nx storybook cms-workspace"
+          },
+          {
+            "command": "npx prisma studio"
+          },
+          {
+            "command": "cd app-docs && yarn start"
+          },
+          {
+            "command": "nx serve cms-workspace"
+          }
+        ],
+        "parallel": true
+      }
+    },
     "build": {
       "executor": "@nx/next:build",
-      "outputs": ["dist/apps/cms-workspace"],
+      "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/cms-workspace"
       }

@@ -14,4 +14,4 @@
 # Setup Instructions
 
 ## View Component Documentation
-For detailed UI component documentation and live examples, visit the [Storybook](http://localhost:4400).
+For detailed UI component documentation and live examples, visit the [Storybook](http://localhost:59581/).
