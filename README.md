@@ -1,53 +1,54 @@
 # CMS with WYSIWYG Editor and Plugin Architecture
 
-## Overview
-This project is a Content Management System (CMS) built with **Next.js**. It allows users to create, edit, and delete posts and pages through a user-friendly interface. The system features a **WYSIWYG editor** for rich text formatting and a **plugin architecture** to enable extensibility.
+A CMS built using **Next.js**, **Prisma**, and **Tailwind CSS**, with a **WYSIWYG editor** and a plugin architecture for extensibility.
 
 ---
 
 ## Features
 
-### Core CMS Functionalities
-- **Post and Page Management:**
-  - Create, Read, Update, and Delete (CRUD) functionality for posts and pages.
-  - Each post/page has:
-    - A **Title**: Editable by users.
-    - A **Slug**: Auto-generated from the title but editable.
-    - A **Content Field**: Supports rich text formatting.
-- **WYSIWYG Editor:**
-  - Integrated using **TipTap**, offering intuitive formatting options.
-- **Data Storage:**
-  - Content stored in **PostgreSQL**, managed via **Prisma ORM**.
+- Create, edit, and delete posts and pages.
+- Rich text editor (powered by **TipTap**).
+- Plugin architecture for custom content blocks.
+- API integration using Prisma with a PostgreSQL database.
+- Responsive UI designed with Tailwind CSS.
+- Documentation using Docusaurus.
+- Storybook for component documentation.
 
-### Plugin Architecture
-- Dynamic plugin system to extend CMS capabilities.
-- Example Plugin:
-  - **Image Plugin:** Adds support for rendering images with custom properties.
-- Plugin API documented to enable developers to integrate custom plugins.
+---
 
-### User Interface and Experience
-- Responsive design with **Tailwind CSS**.
-- Intuitive navigation and layout for non-technical users.
-- Content preview with dynamic rendering of plugins.
+## Prerequisites
+
+- **Node.js** (v18+)
+- **Yarn**
+- **PostgreSQL** (v12+)
+- **Nx CLI**: Install globally with `npm install -g nx`
 
 ---
 
 ## Getting Started
 
-Follow these instructions to set up the project locally.
+### 1. Clone the Repository
+```bash
+git clone <repository-url>
+```
 
-### Prerequisites
-- Node.js (v16 or higher)
-- PostgreSQL
-- Yarn package manager
-
-### Setup Instructions
-
-1. **Clone the repository**:
-   ```bash
-   git clone <repository-url>
-   cd cms-workspace
-
-2. **Install dependencies:**
-
+### 2. Install Dependencies in root
 `yarn install`
+
+
+### 3. Configure the Environment Variables
+Create a .env file in the root of your project with the following contents:
+`DATABASE_URL=postgresql://<username>:<password>@<host>:<port>/<database>`
+
+ Replace <username>, <password>, <host>, <port>, and <database> with your PostgreSQL credentials.
+
+
+### 4. Set Up the Database
+Run the following commands to initialize and migrate the database schema:
+```bash
+npx prisma migrate dev --name init
+npx prisma generate
+```
+
+###  5. Start the Development Server
+`yarn nx serve-all cms-workspace`

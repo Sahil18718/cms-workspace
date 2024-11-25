@@ -8,13 +8,22 @@ const sidebars: SidebarsConfig = {
         'architecture',
         'api',
         'plugins',
-        'deployment',
       ],
     },
     {
       type: 'link',
-      label: 'Storybook', // Label shown in the sidebar
-      href: 'http://localhost:59581/', // Replace with your deployed Storybook URL later
+      label: 'Storybook',
+      href: 'http://localhost:59581/',
+    },
+    {
+      type: 'link',
+      label: 'CMS Application', 
+      href: 'http://localhost:4200/',
+    },
+    {
+      type: 'link',
+      label: 'Prisma Studio',
+      href: 'http://localhost:5555/',
     },
   ],
 };
