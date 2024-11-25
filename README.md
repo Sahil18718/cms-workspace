@@ -40,7 +40,6 @@ git clone <repository-url>
 Create a .env file in the root of your project with the following contents:
 `DATABASE_URL=postgresql://<username>:<password>@<host>:<port>/<database>`
 
- Replace <username>, <password>, <host>, <port>, and <database> with your PostgreSQL credentials.
 
 
 ### 4. Set Up the Database
