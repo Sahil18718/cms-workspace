@@ -56,6 +56,7 @@ npx prisma generate
 ```bash
 yarn nx serve-all cms-workspace
 ```
+Urls
 ```bash
 http://localhost:4200/
 http://localhost:4200/posts/create
