@@ -48,7 +48,7 @@ DATABASE_URL=postgresql://<username>:<password>@<host>:<port>/<database>
 ### 4. Set Up the Database
 Run the following commands to initialize and migrate the database schema:
 ```bash
-npx prisma migrate dev --name init
+npx prisma migrate dev <database-name> init
 npx prisma generate
 ```
 
